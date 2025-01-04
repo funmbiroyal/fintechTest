@@ -1,5 +1,5 @@
 
-# Fintech Dashboard Backend
+# Fintech Backend
 
 ## Project Overview
 
@@ -18,7 +18,7 @@ This is the backend of the **Fintech Dashboard** project. It is designed to hand
 ### 1. Clone the Repository
 Start by cloning the repository to your local machine:
 ```
-git clone https://github.com/your-username/fintech.git
+git clone https://github.com/your-username/fintechTest.git
 cd fintech-dashboard
 ```
 2. Install Dependencies
