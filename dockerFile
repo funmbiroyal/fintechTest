@@ -1,0 +1,30 @@
+# Use Maven 3.9.8 with Amazon Corretto 17 and Amazon Linux 2023
+FROM maven:3.9.8-amazoncorretto-17-al2023 AS build
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy the Maven pom.xml and install dependencies
+COPY pom.xml .
+RUN mvn dependency:go-offline
+
+# Copy the entire project source
+COPY src ./src
+
+# Build the application (without tests for faster builds)
+RUN mvn clean package -DskipTests
+
+# Use a smaller image for runtime, based on Amazon Corretto 17
+FROM amazoncorretto:17-alpine
+
+# Set the working directory
+WORKDIR /app
+
+# Copy the built JAR file from the build stage
+COPY --from=build /app/target/fintech.jar fintech.jar
+
+# Expose port 8080
+EXPOSE 8080
+
+# Run the application
+ENTRYPOINT ["java", "-jar", "fintech.jar"]

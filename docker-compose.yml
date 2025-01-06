@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  fintech:
+    # Build the image from the Dockerfile in the current directory
+    build: .
+    # Expose port 8080 for the Spring Boot application
+    ports:
+      - "8080:8080"
+    # Automatically restart the container if it stops
+    restart: always
